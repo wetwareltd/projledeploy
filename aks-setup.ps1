@@ -27,7 +27,11 @@ param(
 
   # ls
   
-  ssh -t ${Env:UserName}@${Env:PublicIpAddress} -tt
+  ssh -t ${Env:UserName}@${Env:PublicIpAddress} -tt -i ./deployment-key.txt
 
-  curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net' -H Metadata:true
+  ls
+  
+  pwd
+
+  # curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net' -H Metadata:true
 

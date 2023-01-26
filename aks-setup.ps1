@@ -20,4 +20,4 @@ param(
 
   pwd
   
-  ssh ${Env:UserName}@${Env:PublicIpAddress}
+  ssh ${Env:UserName}@${Env:PublicIpAddress} -tt

@@ -5,7 +5,7 @@ param(
   )
 
   # $output = 'Hello {0}. The username is {1}, the password is {2}.' -f $vaultName,${Env:UserName},${Env:Password}
-  $output = 'private to {0}. The username is {1}, the public is {2}.' -f ${Env:PrivateKey},${Env:UserName},${Env:PublicKey}
+  $output = 'private to {0}. The username is {1}, the public is {2}.' -f ${Env:PrivateKey},${Env:UserName},${Env:UserName}
   Write-Output $output
 
   # On bootstrapping VM, login using its user assigned identity

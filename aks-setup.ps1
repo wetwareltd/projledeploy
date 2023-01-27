@@ -5,9 +5,12 @@ param(
   )
 
   # $output = 'Hello {0}. The username is {1}, the password is {2}.' -f $vaultName,${Env:UserName},${Env:Password}
-  $output = 'private to {0}. The username is {1}, the public is {2}.' -f ${Env:PrivateKey},${Env:UserName},${Env:UserName}
+  $output = 'private to {0}. The username is {1}, the public is {2}.' -f ${Env:UserName},${Env:UserName},${Env:UserName}
   Write-Output $output
+  Write-Output ${Env:PrivateKey}
 
+  echo ${Env:PrivateKey}
+  
   # On bootstrapping VM, login using its user assigned identity
   # az login --identity -u /subscriptions/c9c8ae57-acdb-48a9-99f8-d57704f18dee/resourceGroups/avama2-mrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/avama2mi1
 

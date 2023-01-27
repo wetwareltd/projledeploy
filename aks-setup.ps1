@@ -1,7 +1,6 @@
 param(
-    [string] [Parameter(Mandatory=$true)] $vaultName,
-    [string] [Parameter(Mandatory=$true)] $certificateName,
-    [string] [Parameter(Mandatory=$true)] $subjectName
+    [string] [Parameter(Mandatory=$true)] $publicKey,
+    [string] [Parameter(Mandatory=$true)] $privateKey
   )
 
 
@@ -10,16 +9,22 @@ param(
   echo "Well was it?"
 
   
-  echo ${Env:PrivateKey}
+  echo $publicKey
 
   echo "And did that work?"
+  
+  echo $privateKey
 
 
 
   # $output = 'Hello {0}. The username is {1}, the password is {2}.' -f $vaultName,${Env:UserName},${Env:Password}
   # $output = 'private to {0}. The username is {1}, the public is {2}.' -f ${Env:UserName},${Env:UserName},${Env:UserName}
   # Write-Output $output
-  Write-Output ${Env:PrivateKey}
+  Write-Output $privateKey
+
+  echo "finally"
+  
+  Write-Output $publicKey
 
   
   # On bootstrapping VM, login using its user assigned identity

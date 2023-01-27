@@ -7,19 +7,14 @@
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
   $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa
 
-  echo "public: $DeploymentScriptOutputs['publicKey'] "
-  echo "private: $DeploymentScriptOutputs['privateKey'] "
-
-  echo "OR"
-
-  echo "DeploymentScriptOutputs: $DeploymentScriptOutputs "
+  Write-Output  $DeploymentScriptOutputs 
   echo $DeploymentScriptOutputs > $AZ_SCRIPTS_OUTPUT_PATH
 
-  cat ~/.ssh/id_rsa.pub
+  # cat ~/.ssh/id_rsa.pub
 
-  echo ""
+  # echo ""
 
-  cat ~/.ssh/id_rsa
+  # cat ~/.ssh/id_rsa
 
   
 # Save the important properties as depoyment script outputs.

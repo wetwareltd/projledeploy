@@ -1,5 +1,5 @@
 
-  ssh-keygen -t rsa -f ~/.ssh/id_rsa -N '""' -C ""
+  ssh-keygen -t rsa -f ~/.ssh/id_rsa -N '""' -C "comment"
 
   ls -la ~/.ssh/
   

@@ -7,6 +7,15 @@
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
   $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa
 
+  echo "public: $DeploymentScriptOutputs['publicKey'] "
+  echo "private: $DeploymentScriptOutputs['privateKey'] "
+
+  cat ~/.ssh/id_rsa.pub
+
+  echo ""
+
+  cat ~/.ssh/id_rsa
+
   
 # Save the important properties as depoyment script outputs.
 # outputJson=$(jq -n 

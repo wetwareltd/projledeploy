@@ -1,6 +1,3 @@
-param(
-    [string] [Parameter(Mandatory=$true)] $privateKey
-  )
 
 
   echo "Was it cleaned up:"
@@ -16,7 +13,7 @@ param(
   # $output = 'Hello {0}. The username is {1}, the password is {2}.' -f $vaultName,${Env:UserName},${Env:Password}
   # $output = 'private to {0}. The username is {1}, the public is {2}.' -f ${Env:UserName},${Env:UserName},${Env:UserName}
   # Write-Output $output
-  Write-Output $privateKey
+  # Write-Output $privateKey
 
   echo "finally"
   

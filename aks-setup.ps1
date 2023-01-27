@@ -1,5 +1,4 @@
 param(
-    [string] [Parameter(Mandatory=$true)] $publicKey,
     [string] [Parameter(Mandatory=$true)] $privateKey
   )
 
@@ -9,9 +8,6 @@ param(
   echo "Well was it?"
 
   
-  echo $publicKey
-
-  echo "And did that work?"
   
   echo $privateKey
 
@@ -24,7 +20,6 @@ param(
 
   echo "finally"
   
-  Write-Output $publicKey
 
   
   # On bootstrapping VM, login using its user assigned identity

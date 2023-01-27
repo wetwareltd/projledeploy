@@ -1,5 +1,5 @@
 
-  ssh-keygen -t rsa -f ~/.ssh/id_rsa -N '""'
+  ssh-keygen -t rsa -f ~/.ssh/id_rsa -N '""' -C ""
 
   ls -la ~/.ssh/
   
@@ -9,6 +9,11 @@
 
   echo "public: $DeploymentScriptOutputs['publicKey'] "
   echo "private: $DeploymentScriptOutputs['privateKey'] "
+
+  echo "OR"
+
+  echo "DeploymentScriptOutputs: $DeploymentScriptOutputs "
+  echo $DeploymentScriptOutputs > $AZ_SCRIPTS_OUTPUT_PATH
 
   cat ~/.ssh/id_rsa.pub
 

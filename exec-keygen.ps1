@@ -7,7 +7,7 @@
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
   $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa
 
-  Write-Output  $DeploymentScriptOutputs
+  # Write-Output  $DeploymentScriptOutputs
 
   # REM: $AZ_SCRIPTS_OUTPUT_PATH for AZ CLI, and  $DeploymentScriptOutputs for PowerShell
   # echo $DeploymentScriptOutputs > $AZ_SCRIPTS_OUTPUT_PATH

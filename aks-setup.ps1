@@ -16,7 +16,7 @@ param(
 
   echo "decoded privateKey?"
   
-  echo $privateKey
+  echo $decoded
 
 
   

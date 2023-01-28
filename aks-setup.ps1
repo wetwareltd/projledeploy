@@ -12,6 +12,11 @@ param(
   
   echo $privateKey
 
+  $decoded = echo your_encoded_string | base64 --decode
+
+  echo "decoded privateKey?"
+  
+  echo $privateKey
 
 
   

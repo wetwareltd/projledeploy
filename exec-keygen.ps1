@@ -2,10 +2,23 @@
   ssh-keygen -t rsa -f ~/.ssh/id_rsa -N '""' -C "comment"
 
   ls -la ~/.ssh/
+
+  echo "We have a public key"
+  cat ~/.ssh/id_rsa.pub
+
+  echo "We have a private key"
+  cat ~/.ssh/id_rsa
+
+  $Text = cat ~/.ssh/id_rsa
+  $Bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+  $EncodedText = [Convert]::ToBase64String($Bytes)
   
+  echo "We have base64 encoded"
+  cat ~/.ssh/id_rsa
+
   $DeploymentScriptOutputs = @{}
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
-  $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa
+  $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa | base64 | tr -d \\n 
 
   echo  $DeploymentScriptOutputs
 

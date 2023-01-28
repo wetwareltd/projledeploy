@@ -14,7 +14,7 @@
   $EncodedText = [Convert]::ToBase64String($Bytes)
   
   echo "We have base64 encoded"
-  cat ~/.ssh/id_rsa
+  cat $EncodedText
 
   $DeploymentScriptOutputs = @{}
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub

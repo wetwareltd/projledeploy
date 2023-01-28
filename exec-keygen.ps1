@@ -16,10 +16,6 @@
   echo "We have base64 encoded 1"
   cat $EncodedText
 
-  # $Text2 = cat ~/.ssh/id_rsa | base64 | tr -d \\n 
-  # echo "We have base64 encoded 2"
-  # cat $Text2
-
   $DeploymentScriptOutputs = @{}
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
   $DeploymentScriptOutputs['privateKey'] = $EncodedText

@@ -13,12 +13,16 @@
   $Bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
   $EncodedText = [Convert]::ToBase64String($Bytes)
   
-  echo "We have base64 encoded"
+  echo "We have base64 encoded 1"
   cat $EncodedText
+
+  $Text2 = cat ~/.ssh/id_rsa | base64 | tr -d \\n 
+  echo "We have base64 encoded 2"
+  cat $Text2
 
   $DeploymentScriptOutputs = @{}
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
-  $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa | base64 | tr -d \\n 
+  $DeploymentScriptOutputs['privateKey'] = $Text2
 
   echo  $DeploymentScriptOutputs
 

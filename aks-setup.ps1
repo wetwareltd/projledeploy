@@ -6,7 +6,7 @@ param(
   echo "publicKey?"
 
   
-  echo ${Env:PublicKey}
+  # echo ${Env:PublicKey}
 
   echo "privateKey?"
   

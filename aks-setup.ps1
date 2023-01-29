@@ -10,6 +10,7 @@ param(
   $decodedPrivateKey = Write-Output $jsonPrivateKey | ConvertFrom-Json
   $decodedPrivateKey += "`r`n"
   Write-Output $decodedPrivateKey > id_rsa.txt
+  chmod 400 id_rsa.txt
   
   
   Write-Output "Verify the key file"

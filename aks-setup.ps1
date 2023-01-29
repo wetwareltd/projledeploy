@@ -6,12 +6,17 @@ param(
   echo $privateKey
   echo "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"  
 
-  # $encodedText = [Convert]::FromBase64String($privateKey)
-  # $decodedPrivateKey = [System.Text.Encoding]::UTF8.GetString($encodedText)
-  # echo "with decoded privateKey?"  
-  # echo $decodedPrivateKey
+  $decodedText = [Convert]::FromBase64String($privateKey)
+  $jsonPrivateKey = [System.Text.Encoding]::UTF8.GetString($decodedText)
 
-  echo $privateKey|base64 --decode > id_rsa.txt
+  echo "with decoded privateKey?"
+  echo $jsonPrivateKey
+
+  $decodedPrivateKey = echo $jsonPrivateKey | ConvertFrom-Json
+  echo $decodedPrivateKey
+
+  echo $decodedPrivateKey > id_rsa.txt
+  # echo $privateKey|base64 --decode > id_rsa.txt
   
   
   echo "Verify the key file"

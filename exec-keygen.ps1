@@ -9,11 +9,6 @@
   echo "We have a private key"
   cat ~/.ssh/id_rsa
 
-  # $Text = cat ~/.ssh/id_rsa
-  # $Bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
-  # $EncodedText = [Convert]::ToBase64String($Bytes)
-
-  openssl enc -base64 -in ~/.ssh/id_rsa -out ~/.ssh/id_rsa.base64
   
   echo "We have base64 encoded 1"
   # echo $EncodedText
@@ -23,13 +18,15 @@
 
   echo "We have json encoded 1"
   $json = echo $temp | ConvertTo-Json
-  echo $json
-  echo $json.getType()
+  # echo $json
+  # echo $json.getType()
+
+  $Bytes = [System.Text.Encoding]::UTF8.GetBytes($json)
+  $EncodedText = [Convert]::ToBase64String($Bytes)
 
   $DeploymentScriptOutputs = @{}
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
-  $DeploymentScriptOutputs['privateKey'] = echo $json # cat ~/.ssh/id_rsa
-  # $DeploymentScriptOutputs['privateKey'] = $EncodedText
+  $DeploymentScriptOutputs['privateKey'] = $EncodedText
 
 
   # "arguments": "[concat('-privateKey', ' ', concat('\\\"', reference('execKeygen').outputs.privateKey, '\\\"'))]",

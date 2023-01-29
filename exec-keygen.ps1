@@ -22,7 +22,7 @@
 
   $DeploymentScriptOutputs = @{}
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
-  $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa.base64
+  $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa
   # $DeploymentScriptOutputs['privateKey'] = $EncodedText
 
   echo  $DeploymentScriptOutputs

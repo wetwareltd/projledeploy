@@ -1,5 +1,5 @@
 param(
-  [object[]] [Parameter(Mandatory=$true)] $privateKey
+  [string[]] [Parameter(Mandatory=$true)] $privateKey
   # [string] [Parameter(Mandatory=$true)] $privateKey
   )
 

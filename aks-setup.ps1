@@ -3,22 +3,22 @@ param(
   # [string] [Parameter(Mandatory=$true)] $privateKey
   )
 
-  echo "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"  
+  Write-Output "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"  
 
   $decodedText = [Convert]::FromBase64String($privateKey)
   $jsonPrivateKey = [System.Text.Encoding]::UTF8.GetString($decodedText)
-  $decodedPrivateKey = echo $jsonPrivateKey | ConvertFrom-Json
-
-  echo $decodedPrivateKey + "\n" > id_rsa.txt
+  $decodedPrivateKey = Write-Output $jsonPrivateKey | ConvertFrom-Json
+  $decodedPrivateKey += "\n"
+  Write-Output $decodedPrivateKey > id_rsa.txt
   
   
-  echo "Verify the key file"
-  cat id_rsa.txt
+  Write-Output "Verify the key file"
+  Get-Content id_rsa.txt
 
-  echo "Log in to VM"
+  Write-Output "Log in to VM"
   ssh -tt -i id_rsa.txt -tt ${Env:UserName}@${Env:PublicIpAddress}
 
-  echo "Test local FS"
+  Write-Output "Test local FS"
 
   pwd
 

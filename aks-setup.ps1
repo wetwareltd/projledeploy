@@ -10,14 +10,14 @@ param(
   $decodedPrivateKey = Write-Output $jsonPrivateKey | ConvertFrom-Json
   $decodedPrivateKey += "`r`n"
   Write-Output $decodedPrivateKey > id_rsa.txt
-  chmod 600 id_rsa.txt
+  chmod 400 id_rsa.txt
   
   
   Write-Output "Verify the key file"
   Get-Content id_rsa.txt
 
   Write-Output "Log in to VM"
-  ssh -tt -i id_rsa.txt -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress}
+  sudo ssh -tt -i id_rsa.txt -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress}
 
   Write-Output "Test local FS"
 

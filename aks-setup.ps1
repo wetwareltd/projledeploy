@@ -17,7 +17,7 @@ param(
   Get-Content ~/id_rsa.pem
 
   Write-Output "Log in to VM"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress}
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} " pwd && ls && exit"
 
   Write-Output "Test local FS"
 
@@ -25,7 +25,6 @@ param(
 
   ls
 
-  exit
 
 
 

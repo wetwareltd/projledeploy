@@ -8,7 +8,7 @@ param(
   $decodedText = [Convert]::FromBase64String($privateKey)
   $jsonPrivateKey = [System.Text.Encoding]::UTF8.GetString($decodedText)
   $decodedPrivateKey = Write-Output $jsonPrivateKey | ConvertFrom-Json
-  $decodedPrivateKey += "\n"
+  $decodedPrivateKey += "`r`n"
   Write-Output $decodedPrivateKey > id_rsa.txt
   
   

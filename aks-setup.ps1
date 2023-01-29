@@ -1,7 +1,3 @@
-param(
-  [string[]] [Parameter(Mandatory=$true)] $privateKey
-  )
-  
   Write-Output "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"
 
   $decodedText = [Convert]::FromBase64String(${Env:Key})
@@ -25,8 +21,12 @@ param(
   $UserIdentity = "${Env:SubscriptionId}/resourceGroups/${Env:MgdAppGroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${Env:MgdIdentity}"
   Write-Output "with principal $UserIdentity"
 
+  $InstallAzCli = "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"
+
+  $LoginUser = "az login --identity -u $UserIdentity"
+
   Write-Output "Log in to VM"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash && az login --identity -u $UserIdentity && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && exit"
 
   Write-Output "Closing out VM bootstrap setup"
 

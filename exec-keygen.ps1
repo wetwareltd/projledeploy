@@ -12,7 +12,6 @@
   # $Text = cat ~/.ssh/id_rsa
   # $Bytes = [System.Text.Encoding]::UTF8.GetBytes($Text)
   # $EncodedText = [Convert]::ToBase64String($Bytes)
-  $EncodedText = cat ~/.ssh/id_rsa|base64
 
   openssl enc -base64 -in ~/.ssh/id_rsa -out ~/.ssh/id_rsa.base64
   

@@ -22,7 +22,7 @@ param(
   Get-Content ~/id_rsa.pem
 
   # Build up commmands to execute
-  $UserIdentity = "/subscriptions/${Env:SubscriptionId}/resourceGroups/${Env:MgdAppGroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${Env:MgdIdentity}"
+  $UserIdentity = "${Env:SubscriptionId}/resourceGroups/${Env:MgdAppGroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${Env:MgdIdentity}"
   Write-Output "with principal $UserIdentity"
 
   Write-Output "Log in to VM"

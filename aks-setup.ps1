@@ -9,7 +9,6 @@ param(
   
   echo "with decoded privateKey?"  
   echo $decodedPrivateKey
-
   
   # On bootstrapping VM, login using its user assigned identity
   # az login --identity -u /subscriptions/c9c8ae57-acdb-48a9-99f8-d57704f18dee/resourceGroups/avama2-mrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/avama2mi1

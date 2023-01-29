@@ -1,33 +1,31 @@
 param(
   [string[]] [Parameter(Mandatory=$true)] $privateKey
-  # [string] [Parameter(Mandatory=$true)] $privateKey
   )
 
   Write-Output "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"  
+  Write-Output "with principal ${Env:PrincipalId}"
 
   $decodedText = [Convert]::FromBase64String($privateKey)
   $jsonPrivateKey = [System.Text.Encoding]::UTF8.GetString($decodedText)
   $decodedPrivateKey = Write-Output $jsonPrivateKey | ConvertFrom-Json
+
+  # NOTE: The json/base64 encoding process strips off the tail new line.
+  # The new line is requried for the key to be valid.
   $decodedPrivateKey += "`r`n"
+
+  # NOTE: The private key needs to be in the users $HOME directory otherwise
+  # an access policy error is given on login.  Only the user should be able to access
+  # the key
   Write-Output $decodedPrivateKey > ~/id_rsa.pem
   chmod 400 ~/id_rsa.pem
-  
   
   Write-Output "Verify the key file"
   Get-Content ~/id_rsa.pem
 
   Write-Output "Log in to VM"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} " pwd && ls && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "pwd && az login --identity -u  ${Env:PrincipalId} && exit"
 
-  Write-Output "Test local FS"
-
-  pwd
-
-  ls
-
-
-
-
+  Write-Output "Closing out VM bootstrap setup"
 
   # curl 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fvault.azure.net' -H Metadata:true
 

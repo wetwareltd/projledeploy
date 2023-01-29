@@ -25,7 +25,7 @@ param(
   cat id_rsa.txt
 
   echo "Log in to VM"
-  ssh -tt -i id_rsa.txt -t ${Env:UserName}@${Env:PublicIpAddress}
+  ssh -tt -i id_rsa.txt -tt ${Env:UserName}@${Env:PublicIpAddress}
 
   echo "Test local FS"
 

@@ -2,7 +2,9 @@ param(
   [string[]] [Parameter(Mandatory=$true)] $privateKey
   )
 
-  Write-Output "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"  
+  Write-Output "Key ${Env:Key}"
+  
+  Write-Output "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"
   Write-Output "with principal ${Env:UserResourceId}"
 
   $decodedText = [Convert]::FromBase64String($privateKey)

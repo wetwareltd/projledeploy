@@ -16,7 +16,7 @@ param(
   Get-Content id_rsa.txt
 
   Write-Output "Log in to VM"
-  ssh -tt -i id_rsa.txt -tt ${Env:UserName}@${Env:PublicIpAddress}
+  ssh -tt -i id_rsa.txt -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress}
 
   Write-Output "Test local FS"
 

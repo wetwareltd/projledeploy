@@ -9,15 +9,15 @@ param(
   $jsonPrivateKey = [System.Text.Encoding]::UTF8.GetString($decodedText)
   $decodedPrivateKey = Write-Output $jsonPrivateKey | ConvertFrom-Json
   $decodedPrivateKey += "`r`n"
-  Write-Output $decodedPrivateKey > id_rsa.txt
-  chmod 400 id_rsa.txt
+  Write-Output $decodedPrivateKey > ~/.ssh/id_rsa.pem
+  chmod 400 ~/.ssh/id_rsa.pem
   
   
   Write-Output "Verify the key file"
-  Get-Content id_rsa.txt
+  Get-Content ~/.ssh/id_rsa.pem
 
   Write-Output "Log in to VM"
-  sudo ssh -tt -i id_rsa.txt -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress}
+  ssh -tt -i ~/.ssh/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress}
 
   Write-Output "Test local FS"
 

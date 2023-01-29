@@ -1,13 +1,10 @@
 param(
   [string[]] [Parameter(Mandatory=$true)] $privateKey
   )
-
-  Write-Output "Key ${Env:Key}"
   
   Write-Output "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"
-  Write-Output "with principal ${Env:UserResourceId}"
 
-  $decodedText = [Convert]::FromBase64String($privateKey)
+  $decodedText = [Convert]::FromBase64String(${Env:Key})
   $jsonPrivateKey = [System.Text.Encoding]::UTF8.GetString($decodedText)
   $decodedPrivateKey = Write-Output $jsonPrivateKey | ConvertFrom-Json
 

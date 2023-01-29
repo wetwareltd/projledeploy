@@ -21,6 +21,11 @@
   $temp = cat ~/.ssh/id_rsa
   echo $temp.getType()
 
+  echo "We have json encoded 1"
+  $json = echo $temp | ConvertTo-Json
+  echo $json
+  echo $json.getType()
+
   $DeploymentScriptOutputs = @{}
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
   $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa

@@ -22,8 +22,12 @@ param(
   Write-Output "Verify the key file"
   Get-Content ~/id_rsa.pem
 
+  # Build up commmands to execute
+  $UserIdentity = "/subscriptions/${Env:SubscriptionId}/resourceGroups/${Env:MgdAppGroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${Env:MgdIdentity}"
+  Write-Output "with principal $UserIdentity"
+
   Write-Output "Log in to VM"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash && az login --identity -u  ${Env:UserResourceId} && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash && az login --identity -u $UserIdentity && exit"
 
   Write-Output "Closing out VM bootstrap setup"
 

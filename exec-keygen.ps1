@@ -18,12 +18,17 @@
   echo "We have base64 encoded 1"
   # echo $EncodedText
   cat ~/.ssh/id_rsa.base64
-  
+  $temp = cat ~/.ssh/id_rsa
+  echo $temp.getType()
 
   $DeploymentScriptOutputs = @{}
   $DeploymentScriptOutputs['publicKey'] = cat ~/.ssh/id_rsa.pub
   $DeploymentScriptOutputs['privateKey'] = cat ~/.ssh/id_rsa
   # $DeploymentScriptOutputs['privateKey'] = $EncodedText
+
+
+  # "arguments": "[concat('-privateKey', ' ', concat('\\\"', reference('execKeygen').outputs.privateKey, '\\\"'))]",
+
 
   echo  $DeploymentScriptOutputs
 

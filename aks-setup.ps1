@@ -3,7 +3,7 @@ param(
   )
 
   Write-Output "ssh to  ${Env:UserName}@${Env:PublicIpAddress}"  
-  Write-Output "with principal ${Env:PrincipalId}"
+  Write-Output "with principal ${Env:UserResourceId}"
 
   $decodedText = [Convert]::FromBase64String($privateKey)
   $jsonPrivateKey = [System.Text.Encoding]::UTF8.GetString($decodedText)
@@ -23,7 +23,7 @@ param(
   Get-Content ~/id_rsa.pem
 
   Write-Output "Log in to VM"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "pwd && az login --identity -u  ${Env:PrincipalId} && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash && az login --identity -u  ${Env:UserResourceId} && exit"
 
   Write-Output "Closing out VM bootstrap setup"
 

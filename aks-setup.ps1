@@ -23,12 +23,13 @@
 
   $InstallAzCli = "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"
   $LoginUser = "az login --identity -u $UserIdentity"
-  $VmssName = "az resource list  --query `"[?contains(name, 'vmss')].name`""
-  $AddVMSSIdentity = "az vmss identity assign -g ${Env:VmssGroup} -n $VmssName --identities $UserIdentity"
+  $VmssNameList = "`$nameList = az resource list  --query `"[?contains(name, 'vmss')].name`""
+  $VmssNameHarvest = "`$vmssName = `$nameList[0]"
+  $AddVMSSIdentity = "az vmss identity assign -g ${Env:VmssGroup} -n `$vmssName --identities $UserIdentity"
   $GetAksCredentials = "az aks get-credentials -g ${Env:MgdAppGroup} -n ${Env:AppName}"
 
   Write-Output "Log in to VM"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $AddVMSSIdentity && $GetAksCredentials && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $VmssNameList && $VmssNameHarvest && $AddVMSSIdentity && $GetAksCredentials && exit"
 
   Write-Output "Closing out VM bootstrap setup"
 

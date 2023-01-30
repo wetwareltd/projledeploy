@@ -29,7 +29,8 @@
   $GetAksCredentials = "az aks get-credentials -g ${Env:MgdAppGroup} -n ${Env:AppName}"
 
   Write-Output "Log in to VM"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $VmssNameList && $VmssNameHarvest && $AddVMSSIdentity && $GetAksCredentials && exit"
+  # ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $VmssNameList && $VmssNameHarvest && $AddVMSSIdentity && $GetAksCredentials && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && exit"
 
   Write-Output "Closing out VM bootstrap setup"
 

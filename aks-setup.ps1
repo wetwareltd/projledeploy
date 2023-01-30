@@ -23,7 +23,7 @@
 
   $InstallAzCli = "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"
   $LoginUser = "az login --identity -u $UserIdentity"
-  $VmssName = ""
+  $VmssName = "az resource list  --query `"[?contains(name, 'vmss')].name`""
   $AddVMSSIdentity = "az vmss identity assign -g ${Env:VmssGroup} -n $VmssName --identities $UserIdentity"
   $GetAksCredentials = "az aks get-credentials -g ${Env:MgdAppGroup} -n ${Env:AppName}"
 

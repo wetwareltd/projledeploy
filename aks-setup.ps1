@@ -24,6 +24,7 @@
   $InstallAzCli = "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"
   $LoginUser = "az login --identity -u $UserIdentity"
   $VmssNameHarvest = "vmssName=`$(az vmss list --output tsv --query [0].name)"
+  $EchoVmssName = "echo `$vmssName"
   $AddVMSSIdentity = "az vmss identity assign -g ${Env:VmssGroup} -n `$vmssName --identities $UserIdentity"
   $PropogateVMMSIdentity = 'az vmss update-instances -g ${Env:VmssGroup} -n `$vmssName --instance-ids *'
   $GetAksCredentials = "az aks get-credentials -g ${Env:MgdAppGroup} -n ${Env:AppName}"
@@ -31,7 +32,7 @@
   $InstallKubectl = "sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl"
   
   Write-Output "Log in to VM"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && $AddVMSSIdentity && $PropogateVMMSIdentity && $GetAksCredentials && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && $EchoVmssName && $AddVMSSIdentity && $PropogateVMMSIdentity && $GetAksCredentials && exit"
   # ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && exit"
 
   Write-Output "Closing out VM bootstrap setup"

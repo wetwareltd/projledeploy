@@ -33,7 +33,7 @@
   
   Write-Output "Log in to VM"
   # ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && $EchoVmssName && $AddVMSSIdentity && $PropogateVMMSIdentity && exit"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && $DownloadKubectl && $InstallKubectl && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && exit"
 
   Write-Output "Closing out VM bootstrap setup"
 

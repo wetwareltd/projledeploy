@@ -16,7 +16,7 @@
   
   Write-Output "Verify the key file"
   Get-Content ~/id_rsa.pem
-
+ 
   # Build up commmands to execute
   $UserIdentity = "${Env:SubscriptionId}/resourceGroups/${Env:MgdAppGroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${Env:MgdIdentity}"
   Write-Output "with principal $UserIdentity"

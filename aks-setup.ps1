@@ -21,6 +21,7 @@
   $UserIdentity = "${Env:SubscriptionId}/resourceGroups/${Env:MgdAppGroup}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/${Env:MgdIdentity}"
   Write-Output "with principal $UserIdentity"
 
+  # Install tooling to VM
   $InstallAzCli = "curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash"
   $LoginUser = "az login --identity -u $UserIdentity"
   $GetAksCredentials = "az aks get-credentials -g ${Env:MgdAppGroup} -n ${Env:AppName}"
@@ -29,11 +30,16 @@
   $VmssNameHarvest = "vmssName=`$(az vmss list --output tsv --query [0].name)"
   $EchoVmssName = "echo `$vmssName"
   $AddVMSSIdentity = "az vmss identity assign -g ${Env:VmssGroup} -n `$vmssName --identities $UserIdentity"
-  $PropogateVMMSIdentity = 'az vmss update-instances -g ${Env:VmssGroup} -n `$vmssName --instance-ids *'
+  $PropogateVMMSIdentity = "az vmss update-instances -g ${Env:VmssGroup} -n `$vmssName --instance-ids *"
   
   Write-Output "Log in to VM"
   # ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && $EchoVmssName && $AddVMSSIdentity && $PropogateVMMSIdentity && exit"
-  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && $EchoVmssName && $AddVMSSIdentity && exit"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && $EchoVmssName && $AddVMSSIdentity && $PropogateVMMSIdentity && exit"
+
+  # Install tooling to Pod Pool
+
+
+
 
   Write-Output "Closing out VM bootstrap setup"
 

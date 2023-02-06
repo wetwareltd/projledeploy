@@ -32,13 +32,17 @@
   $AddVMSSIdentity = "az vmss identity assign -g ${Env:VmssGroup} -n `$vmssName --identities $UserIdentity"
   $PropogateVMMSIdentity = "az vmss update-instances -g ${Env:VmssGroup} -n `$vmssName --instance-ids *"
   
-  Write-Output "Log in to VM"
-  # ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && $EchoVmssName && $AddVMSSIdentity && $PropogateVMMSIdentity && exit"
+  Write-Output "Setup VM"
   ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$InstallAzCli && $LoginUser && $GetAksCredentials && $DownloadKubectl && $InstallKubectl && $VmssNameHarvest && $EchoVmssName && $AddVMSSIdentity && exit"
 
   # Install tooling to Pod Pool
+  $LoginToKubectlPod = "kubectl run --rm -it test --image=alpine"
+  $InstallTooling = "apk add curl jq"
+  $GetToken = "export ACCESS_TOKEN=`$(curl -H Metadata:true -s --noproxy `"*`" `"http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=https%3A%2F%2Fstorage.azure.com%2F&mi_res_id=$UserIdentity`" | jq | jq -r '.access_token')"
+  $EchoToken = "echo `$ACCESS_TOKEN"
 
-
+  Write-Output "Setup VMSS pool"
+  ssh -tt -i ~/id_rsa.pem -tt -o StrictHostKeyChecking=No ${Env:UserName}@${Env:PublicIpAddress} "$LoginToKubectlPod && $InstallTooling  && $GetToken  && $EchoToken && exit"
 
 
   Write-Output "Closing out VM bootstrap setup"
